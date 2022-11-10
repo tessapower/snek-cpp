@@ -21,7 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game(MainWindow& wnd) : _wnd(wnd), _gfx(wnd) {}
+Game::Game(MainWindow& wnd) : _wnd(wnd), _gfx(wnd), _brd(_gfx) {}
 
 void Game::Go() {
   _gfx.BeginFrame();
@@ -34,4 +34,5 @@ void Game::UpdateModel() {
 }
 
 void Game::ComposeFrame() {
+  _brd.drawBorder();
 }
