@@ -22,9 +22,11 @@
 
 #include <random>
 #include "Board.h"
+#include "Graphics.h"
+#include "Direction.h"
 #include "Keyboard.h"
 #include "Mouse.h"
-#include "Graphics.h"
+#include "Snake.h"
 
 class Game {
 public:
@@ -35,17 +37,28 @@ public:
 private:
   void ComposeFrame();
   void UpdateModel();
+
   /********************************/
   /*  User Functions              */
+  void updateNextDirection(Direction const& nextDir) noexcept;
   /********************************/
 private:
   MainWindow& _wnd;
   Graphics _gfx;
+
   /********************************/
   /*  User Variables              */
   Board _brd;
+  Snake _snek;
+  bool _hasGameStarted = false;
+  bool _isGameOver = false;
+  int _frameCount = 0;
 
-  // std::random_device _rd;
-  // std::mt19937 _rng;
+  Direction _dir = Direction::RIGHT;
+  Direction _pendingDir = Direction::NONE;
+  static constexpr int _movePeriod = 8;
+
+  std::random_device _rd;
+  std::mt19937 _rng;
   /********************************/
 };
