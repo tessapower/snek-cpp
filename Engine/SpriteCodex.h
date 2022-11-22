@@ -2,9 +2,8 @@
 
 #include "Graphics.h"
 
-class SpriteCodex
-{
+class SpriteCodex {
 public:
-	static void DrawGameOver( int x,int y,Graphics& gfx );
-	static void DrawTitle( int x,int y,Graphics& gfx );
+  static void DrawGameOver(int x, int y, Graphics& gfx);
+  static void DrawTitle(int x, int y, Graphics& gfx);
 };

@@ -16,9 +16,7 @@ class Board {
   uint8_t cols() { return _numCols; }
 
   bool isWithinBoard(Location l) const;
-
   void drawCell(Location l, Color c);
-
   void drawBorder();
 
  private:
