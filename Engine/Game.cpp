@@ -18,6 +18,9 @@
  * You should have received a copy of the GNU General Public License                      *
  * along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.   *
  ******************************************************************************************/
+#include <algorithm>
+#include <iterator>
+
 #include "MainWindow.h"
 #include "Game.h"
 #include "SpriteCodex.h"
@@ -67,6 +70,7 @@ void Game::handleSnakeMovement() noexcept {
     _score++;
 
     _apple.location(randomFreeLocation());
+    if (_rng() % 100 > 30) _rocks.emplace_back(Rock{randomFreeLocation()});
   } else {
     _snek.move(_dir);
   }
@@ -81,7 +85,9 @@ bool Game::ateApple() const noexcept {
 Location const Game::randomFreeLocation() noexcept {
   auto isTileFree = [&](Location const& loc) {
     return !_snek.isOnTile(loc)
-      && _apple.location() != loc;
+      && _apple.location() != loc &&
+           std::none_of(begin(_rocks), end(_rocks),
+                        [&](Rock const r) { return r.location() == loc; });
   };
 
   Location randomLoc;
@@ -94,7 +100,9 @@ Location const Game::randomFreeLocation() noexcept {
 
 bool Game::checkGameOverConditions() const noexcept {
    return !_brd.isWithinBoard(_snek.location())
-     || _snek.isCollidingWithSelf();
+     || _snek.isCollidingWithSelf() ||
+         std::any_of(begin(_rocks), end(_rocks),
+                     [&](Rock const& r) { return r.location() == _snek.location(); });
 }
 
 void Game::handlePlayerInput() noexcept {
@@ -143,6 +151,8 @@ void Game::ComposeFrame() {
     _brd.drawBorder();
     _snek.draw(_brd);
     _apple.draw(_brd);
+    std::ranges::for_each(begin(_rocks), end(_rocks),
+                          [&](Rock const r) { r.draw(_brd); });
   } else {
     SpriteCodex::DrawGameOver(350, 275, _gfx);
   }

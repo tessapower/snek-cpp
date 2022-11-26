@@ -23,6 +23,7 @@
 #include <random>
 #include <vector>
 #include "Apple.h"
+#include "Rock.h"
 #include "Board.h"
 #include "Graphics.h"
 #include "Direction.h"
@@ -72,5 +73,6 @@ private:
   std::uniform_int_distribution<int> _yDist;
 
   Apple _apple;
+  std::vector<Rock> _rocks{};
   /********************************/
 };
