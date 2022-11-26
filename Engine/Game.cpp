@@ -22,7 +22,16 @@
 #include "Game.h"
 #include "SpriteCodex.h"
 
-Game::Game(MainWindow& wnd) : _wnd(wnd), _gfx(wnd), _brd(_gfx), _rng(_rd()), _snek({3, 3}) {}
+Game::Game(MainWindow& wnd)
+  :
+  _wnd(wnd),
+  _gfx(wnd),
+  _brd(_gfx),
+  _rng(_rd()),
+  _xDist(0, _brd.cols()),
+  _yDist(0, _brd.rows()),
+  _snek({3, 3}) {
+}
 
 void Game::Go() {
   _gfx.BeginFrame();

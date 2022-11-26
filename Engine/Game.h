@@ -60,5 +60,7 @@ private:
 
   std::random_device _rd;
   std::mt19937 _rng;
+  std::uniform_int_distribution<int> _xDist;
+  std::uniform_int_distribution<int> _yDist;
   /********************************/
 };
