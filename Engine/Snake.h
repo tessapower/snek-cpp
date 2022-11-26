@@ -49,13 +49,13 @@ class Snake {
 
   std::vector<Segment> _segments{};
 
-  static constexpr Color _headColor = Colors::MakeRGB(236u, 243u, 158u);
+  static constexpr Color _headColor = Colors::MakeRGB(119u, 167u, 117u);
   static constexpr int _numTailColors = 4;
   static constexpr Color _tailColors[_numTailColors] = {
-    Colors::MakeRGB(44u, 99u, 44u),
-    Colors::MakeRGB(79u, 119u, 45u),
-    Colors::MakeRGB(144u, 169u, 85u),
-    Colors::MakeRGB(49u, 87u, 44u)
+    Colors::MakeRGB(96u, 149u, 102u),
+    Colors::MakeRGB(60u, 108u, 70u),
+    Colors::MakeRGB(44u, 78u, 51u),
+    Colors::MakeRGB(60u, 108u, 70u)
   };
 
   std::random_device _rd;

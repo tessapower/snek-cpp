@@ -142,7 +142,7 @@ void Game::updateNextDirection(Direction const& nextDir) noexcept {
 
 void Game::ComposeFrame() {
   if (!_hasGameStarted) {
-    SpriteCodex::DrawTitle(300, 200, _gfx);
+    SpriteCodex::drawTitle(0, 0, _gfx);
 
     return;
   }
@@ -154,6 +154,6 @@ void Game::ComposeFrame() {
     std::ranges::for_each(begin(_rocks), end(_rocks),
                           [&](Rock const r) { r.draw(_brd); });
   } else {
-    SpriteCodex::DrawGameOver(350, 275, _gfx);
+    SpriteCodex::drawGameOver(0, 0, _gfx);
   }
 }

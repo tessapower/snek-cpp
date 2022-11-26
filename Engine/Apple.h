@@ -18,7 +18,7 @@ class Apple {
 
  private:
   Location _location;
-  static constexpr Color _color = Colors::Red;
+  static constexpr Color _color = Colors::MakeRGB(230u, 82u, 83u);
 };
 
 #endif // APPLE_H
