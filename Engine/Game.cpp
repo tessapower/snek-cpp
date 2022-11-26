@@ -79,26 +79,22 @@ void Game::handlePlayerInput() noexcept {
 }
 
 void Game::updateNextDirection(Direction const& nextDir) noexcept {
-  // Don't do anything if we're already going in this direction
+  // Don't do anything if we're already going (or planning to go) in this direction
   if (_dir == nextDir || _pendingDir == nextDir) return;
 
   // Make sure we can't go in the exact opposite direction
   switch (nextDir) {
     case Direction::UP:
-      if (_dir == Direction::DOWN)
-        return;
+      if (_dir == Direction::DOWN) return;
       break;
     case Direction::DOWN: 
-      if (_dir == Direction::UP)
-        return;
+      if (_dir == Direction::UP) return;
       break;
     case Direction::LEFT:
-      if (_dir == Direction::RIGHT)
-        return;
+      if (_dir == Direction::RIGHT) return;
       break;
     case Direction::RIGHT:
-      if (_dir == Direction::LEFT)
-        return;
+      if (_dir == Direction::LEFT) return;
       break;
   }
 

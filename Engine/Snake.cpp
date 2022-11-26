@@ -7,18 +7,18 @@ void Snake::draw(Board& brd) const noexcept {
   // Draw Tail
   for (auto const& s : _segments) {
     s.draw(brd);
-   }
+  }
 }
 
 void Snake::move(Direction const dir) noexcept {
-  Location delta; 
+  Location delta;
   switch (dir) {
     case Direction::UP:    delta = {0, (uint8_t)-1}; break;
     case Direction::DOWN:  delta = {0, (uint8_t)1}; break;
     case Direction::LEFT:  delta = {(uint8_t)-1, 0}; break;
     case Direction::RIGHT: delta = {(uint8_t)1, 0}; break;
     default: return;
-   }
+  }
 
   // Save current head location so the tail can follow
   auto headLoc = _location;
