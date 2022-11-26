@@ -10,13 +10,13 @@ class Snake {
   {
     _segments.emplace_back(
       Segment{
-        {(uint8_t)(l.x - 1), l.y},
+        {l.x - 1, l.y},
         _tailColors[_randomTailColor(_rng)]
       }
     );
     _segments.emplace_back(
       Segment{
-        {(uint8_t)(l.x - 2), l.y},
+        {l.x - 2, l.y},
         _tailColors[_randomTailColor(_rng)]
       }
     );

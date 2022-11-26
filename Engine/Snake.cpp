@@ -13,10 +13,10 @@ void Snake::draw(Board& brd) const noexcept {
 void Snake::move(Direction const dir) noexcept {
   Location delta;
   switch (dir) {
-    case Direction::UP:    delta = {0, (uint8_t)-1}; break;
-    case Direction::DOWN:  delta = {0, (uint8_t)1}; break;
-    case Direction::LEFT:  delta = {(uint8_t)-1, 0}; break;
-    case Direction::RIGHT: delta = {(uint8_t)1, 0}; break;
+    case Direction::UP:    delta = { 0, -1}; break;
+    case Direction::DOWN:  delta = { 0,  1}; break;
+    case Direction::LEFT:  delta = {-1,  0}; break;
+    case Direction::RIGHT: delta = { 1,  0}; break;
     default: return;
   }
 
