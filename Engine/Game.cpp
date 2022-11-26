@@ -46,37 +46,35 @@ void Game::UpdateModel() {
   }
 
   if (_hasGameStarted && !_isGameOver) {
-    _frameCount++;
+    if (_frameCount++ % _movePeriod == 0) handleSnakeMovement();
+    _isGameOver = checkGameOverConditions();
+    handlePlayerInput();
+  }
+}
 
-    // update snake
-    if (_frameCount % _movePeriod == 0) {
-      if (_pendingDir == Direction::NONE) {
-        _snek.move(_dir);
-      } else {
-        _snek.move(_pendingDir);
-        _dir = _pendingDir;
-        _pendingDir = Direction::NONE;
-      }
-    }
+void Game::handleSnakeMovement() noexcept {
+  if (_pendingDir != Direction::NONE) {
+    _dir = _pendingDir;
+    _pendingDir = Direction::NONE;
+  }
 
-    if (!_brd.isWithinBoard(_snek.location()) || _snek.isCollidingWithSelf()) {
-      _isGameOver = true;
+  _snek.move(_dir);
+}
 
-      return;
-    }
+bool Game::checkGameOverConditions() noexcept {
+    // TODO check if snek is colliding with any obstacles
+   return !_brd.isWithinBoard(_snek.location()) || _snek.isCollidingWithSelf();
+}
 
-    if (_wnd.kbd.KeyIsPressed(VK_UP)) {
-      updateNextDirection(Direction::UP);
-    } else if (_wnd.kbd.KeyIsPressed(VK_DOWN)) {
-      updateNextDirection(Direction::DOWN);
-    } else if (_wnd.kbd.KeyIsPressed(VK_LEFT)) {
-      updateNextDirection(Direction::LEFT);
-    } else if (_wnd.kbd.KeyIsPressed(VK_RIGHT)) {
-      updateNextDirection(Direction::RIGHT);
-    }
-
-    // update apples
-    // update score
+void Game::handlePlayerInput() noexcept {
+  if (_wnd.kbd.KeyIsPressed(VK_UP)) {
+    updateNextDirection(Direction::UP);
+  } else if (_wnd.kbd.KeyIsPressed(VK_DOWN)) {
+    updateNextDirection(Direction::DOWN);
+  } else if (_wnd.kbd.KeyIsPressed(VK_LEFT)) {
+    updateNextDirection(Direction::LEFT);
+  } else if (_wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+    updateNextDirection(Direction::RIGHT);
   }
 }
 

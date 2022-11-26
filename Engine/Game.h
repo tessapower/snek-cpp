@@ -40,6 +40,9 @@ private:
 
   /********************************/
   /*  User Functions              */
+  void handleSnakeMovement() noexcept;
+  bool checkGameOverConditions() noexcept;
+  void handlePlayerInput() noexcept;
   void updateNextDirection(Direction const& nextDir) noexcept;
   /********************************/
 private:
