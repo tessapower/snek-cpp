@@ -15,7 +15,7 @@ class Snake {
   bool isOnTile(Location const& l) const noexcept;
   void grow();
 
-  Location const& location() { return _location; }
+  Location const& location() const noexcept { return _location; }
    
  private:
   Location _location;
@@ -25,15 +25,13 @@ class Snake {
     Segment(Location const& l, Color c) : _location(l), _color(c){}
     void draw(Board& brd) const noexcept;
     
-    Location const& location() { return _location; }
+    Location const& location() const noexcept { return _location; }
 
     void follow(Location const& next) { _location = next; }
     
    private:
     Location _location;
     Color _color;
-
-    friend Snake;
   };
 
   std::vector<Segment> _segments{};

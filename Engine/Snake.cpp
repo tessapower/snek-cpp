@@ -20,21 +20,19 @@ void Snake::move(Direction const dir) noexcept {
     default: return;
   }
 
-  // Save current head location so the tail can follow
-  auto headLoc = _location;
-  _location.add(delta);
-  
   if (!_segments.empty()) {
     for (auto i = _segments.size() - 1; i > 0; --i) {
       _segments[i].follow(_segments[i - 1].location());
     }
-    _segments.front().follow(headLoc);
+    _segments.front().follow(_location);
   }
+
+  _location.add(delta);
 }
 
 bool Snake::isCollidingWithSelf() const noexcept {
   for (auto const& s : _segments) {
-    if (s._location == _location) return true;
+    if (s.location() == _location) return true;
   }
 
   return false;
