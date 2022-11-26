@@ -41,8 +41,9 @@ bool Snake::isCollidingWithSelf() const noexcept {
 bool Snake::isOnTile(Location const& loc) const noexcept {
   if (_location == loc) return true;
 
-  for (auto const& s : _segments) {
-    if (s._location == loc) return true;
+  if (std::any_of(begin(_segments), end(_segments),
+                  [&](Segment const& s) { return s.location() == loc; })) {
+      return true;
   }
 
   return false;
