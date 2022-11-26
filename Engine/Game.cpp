@@ -30,7 +30,11 @@ Game::Game(MainWindow& wnd)
   _rng(_rd()),
   _xDist(0, _brd.cols()),
   _yDist(0, _brd.rows()),
-  _snek({3, 3}) {
+  _snek({3, 3}),
+  _apple({0, 0}) {
+  // We always create an apple at location (0, 0) and then immediately move it
+  // to a random location on the board
+  _apple.location(randomFreeLocation());
 }
 
 void Game::Go() {
@@ -58,12 +62,39 @@ void Game::handleSnakeMovement() noexcept {
     _pendingDir = Direction::NONE;
   }
 
-  _snek.move(_dir);
+  if (ateApple()) {
+    _snek.moveAndGrow(_dir);
+    _score++;
+
+    _apple.location(randomFreeLocation());
+  } else {
+    _snek.move(_dir);
+  }
 }
 
-bool Game::checkGameOverConditions() noexcept {
-    // TODO check if snek is colliding with any obstacles
-   return !_brd.isWithinBoard(_snek.location()) || _snek.isCollidingWithSelf();
+bool Game::ateApple() const noexcept {
+  const auto& nextLoc = _snek.location().next(_dir);
+
+  return _apple.location() == nextLoc;
+}
+
+Location const Game::randomFreeLocation() noexcept {
+  auto isTileFree = [&](Location const& loc) {
+    return !_snek.isOnTile(loc)
+      && _apple.location() != loc;
+  };
+
+  Location randomLoc;
+  do {
+     randomLoc = {(uint8_t)_xDist(_rng), (uint8_t)_yDist(_rng)};
+  } while (!isTileFree(randomLoc));
+
+  return randomLoc;
+}
+
+bool Game::checkGameOverConditions() const noexcept {
+   return !_brd.isWithinBoard(_snek.location())
+     || _snek.isCollidingWithSelf();
 }
 
 void Game::handlePlayerInput() noexcept {
@@ -111,6 +142,7 @@ void Game::ComposeFrame() {
   if (!_isGameOver) {
     _brd.drawBorder();
     _snek.draw(_brd);
+    _apple.draw(_brd);
   } else {
     SpriteCodex::DrawGameOver(350, 275, _gfx);
   }

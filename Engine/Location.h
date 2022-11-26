@@ -12,13 +12,13 @@ class Location {
     y += delta.y;
   }
 
-  Location const& next(Direction dir) const noexcept {
+  Location const next(Direction dir) const noexcept {
     switch (dir) {
-      case Direction::UP:    return {x, (uint8_t)(y - 1)};
-      case Direction::DOWN:  return {x, (uint8_t)(y + 1)};
-      case Direction::LEFT:  return {(uint8_t)(x - 1), y};
-      case Direction::RIGHT: return {(uint8_t)(x + 1), y};
-      default:               return {x, y};
+      case Direction::UP:    return Location{x, (uint8_t)(y - 1)};
+      case Direction::DOWN:  return Location{x, (uint8_t)(y + 1)};
+      case Direction::LEFT:  return Location{(uint8_t)(x - 1), y};
+      case Direction::RIGHT: return Location{(uint8_t)(x + 1), y};
+      default:               return Location{x, y};
     };
   };
 

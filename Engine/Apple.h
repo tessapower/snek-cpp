@@ -14,6 +14,7 @@ class Apple {
   }
 
   Location const& location() const noexcept { return _location; }
+  void location(Location const& loc) noexcept { _location = loc; }
 
  private:
   Location _location;

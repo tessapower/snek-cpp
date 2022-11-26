@@ -21,6 +21,8 @@
 #pragma once
 
 #include <random>
+#include <vector>
+#include "Apple.h"
 #include "Board.h"
 #include "Graphics.h"
 #include "Direction.h"
@@ -41,7 +43,9 @@ private:
   /********************************/
   /*  User Functions              */
   void handleSnakeMovement() noexcept;
-  bool checkGameOverConditions() noexcept;
+  bool ateApple() const noexcept;
+  Location const randomFreeLocation() noexcept;
+  bool checkGameOverConditions() const noexcept;
   void handlePlayerInput() noexcept;
   void updateNextDirection(Direction const& nextDir) noexcept;
   /********************************/
@@ -56,6 +60,7 @@ private:
   bool _hasGameStarted = false;
   bool _isGameOver = false;
   int _frameCount = 0;
+  int _score = 0;
 
   Direction _dir = Direction::RIGHT;
   Direction _pendingDir = Direction::NONE;
@@ -65,5 +70,7 @@ private:
   std::mt19937 _rng;
   std::uniform_int_distribution<int> _xDist;
   std::uniform_int_distribution<int> _yDist;
+
+  Apple _apple;
   /********************************/
 };
