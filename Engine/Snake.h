@@ -13,7 +13,7 @@ class Snake {
   void move(Direction const dir) noexcept;
   bool isCollidingWithSelf() const noexcept;
   bool isOnTile(Location const& l) const noexcept;
-  void grow();
+  void moveAndGrow(Direction const dir) noexcept;
 
   Location const& location() const noexcept { return _location; }
    
@@ -22,7 +22,8 @@ class Snake {
 
   class Segment {
    public:
-    Segment(Location const& l, Color c) : _location(l), _color(c){}
+    Segment(const Color c) : _location({0, 0}), _color(c){}
+    Segment(Location const& l, const Color c) : _location(l), _color(c){}
     void draw(Board& brd) const noexcept;
     
     Location const& location() const noexcept { return _location; }

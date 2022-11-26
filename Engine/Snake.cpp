@@ -49,8 +49,9 @@ bool Snake::isOnTile(Location const& loc) const noexcept {
   return false;
 }
 
-void Snake::grow() {
-  // TODO!
+void Snake::moveAndGrow(Direction const dir) noexcept {
+  _segments.emplace_back(Segment(_tailColor));
+  move(dir);
 }
 
 void Snake::Segment::draw(Board& brd) const noexcept {
