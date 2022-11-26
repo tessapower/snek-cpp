@@ -50,12 +50,10 @@ bool Snake::isOnTile(Location const& loc) const noexcept {
 }
 
 void Snake::moveAndGrow(Direction const dir) noexcept {
-  _segments.emplace_back(Segment(_tailColor));
+  _segments.emplace_back(Segment(_tailColors[_randomTailColor(_rng)]));
   move(dir);
 }
 
 void Snake::Segment::draw(Board& brd) const noexcept {
-  // TODO!
-  // Select random color from list of colors
   brd.drawCell(_location, _color);
 }

@@ -31,8 +31,8 @@ Game::Game(MainWindow& wnd)
   _gfx(wnd),
   _brd(_gfx),
   _rng(_rd()),
-  _xDist(0, _brd.cols()),
-  _yDist(0, _brd.rows()),
+  _xDist(0, _brd.cols() - 1),
+  _yDist(0, _brd.rows() - 1),
   _snek({3, 3}),
   _apple({0, 0}) {
   // We always create an apple at location (0, 0) and then immediately move it
