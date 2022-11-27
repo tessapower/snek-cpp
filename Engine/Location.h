@@ -1,12 +1,13 @@
 #pragma once
 
 #include <cstdint>
+
 #include "Direction.h"
 
 class Location {
  public:
   Location(int x = 0, int y = 0) : x(x), y(y){};
-  
+
   void add(Location const& delta) {
     x += delta.x;
     y += delta.y;
@@ -14,11 +15,16 @@ class Location {
 
   Location const next(Direction dir) const noexcept {
     switch (dir) {
-      case Direction::UP:    return Location{x    , y - 1};
-      case Direction::DOWN:  return Location{x    , y + 1};
-      case Direction::LEFT:  return Location{x - 1, y    };
-      case Direction::RIGHT: return Location{x + 1, y    };
-      default:               return Location{x    , y    };
+      case Direction::UP:
+        return Location{x, y - 1};
+      case Direction::DOWN:
+        return Location{x, y + 1};
+      case Direction::LEFT:
+        return Location{x - 1, y};
+      case Direction::RIGHT:
+        return Location{x + 1, y};
+      default:
+        return Location{x, y};
     };
   };
 

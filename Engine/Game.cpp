@@ -1,40 +1,41 @@
-/****************************************************************************************** 
- * Chili DirectX Framework Version 16.07.20                                               *    
- * Game.cpp                                                                               *
- * Copyright 2016 PlanetChili.net <http://www.planetchili.net>                            *
- *                                                                                        *
- * This file is part of The Chili DirectX Framework.                                      *
- *                                                                                        *
- * The Chili DirectX Framework is free software: you can redistribute it and/or modify    *
- * it under the terms of the GNU General Public License as published by                   *
- * the Free Software Foundation, either version 3 of the License, or                      *
- * (at your option) any later version.                                                    *
- *                                                                                        *
- * The Chili DirectX Framework is distributed in the hope that it will be useful,         *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of                         *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                          *
- * GNU General Public License for more details.                                           *
- *                                                                                        *
- * You should have received a copy of the GNU General Public License                      *
- * along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.   *
- ******************************************************************************************/
+/******************************************************************************
+ * Chili DirectX Framework Version 16.07.20                                   *
+ * Game.cpp                                                                   *
+ * Copyright 2016 PlanetChili <http://www.planetchili.net>                    *
+ *                                                                            *
+ * This file is part of The Chili DirectX Framework.                          *
+ *                                                                            *
+ * The Chili DirectX Framework is free software: you can redistribute it      *
+ * and/or modify it under the terms of the GNU General Public License as      *
+ * published by the Free Software Foundation, either version 3 of the         *
+ * License, or (at your option) any later version.                            *
+ *                                                                            *
+ * The Chili DirectX Framework is distributed in the hope that it will be     *
+ * useful,but WITHOUT ANY WARRANTY; without even the implied warranty of      *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              *
+ * GNU General Public License for more details.                               *
+ *                                                                            *
+ * You should have received a copy of the GNU General Public License along    *
+ * with The Chili DirectX Framework.                                          *
+ * If not, see <http://www.gnu.org/licenses/>.                                *
+ ******************************************************************************/
+#include "Game.h"
+
 #include <algorithm>
 #include <iterator>
 
 #include "MainWindow.h"
-#include "Game.h"
 #include "SpriteCodex.h"
 
 Game::Game(MainWindow& wnd)
-  :
-  _wnd(wnd),
-  _gfx(wnd),
-  _brd(_gfx),
-  _rng(_rd()),
-  _xDist(0, _brd.cols() - 1),
-  _yDist(0, _brd.rows() - 1),
-  _snek({3, 3}),
-  _apple({0, 0}) {
+    : _wnd(wnd),
+      _gfx(wnd),
+      _brd(_gfx),
+      _rng(_rd()),
+      _xDist(0, _brd.cols() - 1),
+      _yDist(0, _brd.rows() - 1),
+      _snek({3, 3}),
+      _apple({0, 0}) {
   // We always create an apple at location (0, 0) and then immediately move it
   // to a random location on the board
   _apple.location(randomFreeLocation());
@@ -84,25 +85,24 @@ bool Game::ateApple() const noexcept {
 
 Location const Game::randomFreeLocation() noexcept {
   auto isTileFree = [&](Location const& loc) {
-    return !_snek.isOnTile(loc)
-      && _apple.location() != loc &&
+    return !_snek.isOnTile(loc) && _apple.location() != loc &&
            std::none_of(begin(_rocks), end(_rocks),
                         [&](Rock const r) { return r.location() == loc; });
   };
 
   Location randomLoc;
   do {
-     randomLoc = {(uint8_t)_xDist(_rng), (uint8_t)_yDist(_rng)};
+    randomLoc = {(uint8_t)_xDist(_rng), (uint8_t)_yDist(_rng)};
   } while (!isTileFree(randomLoc));
 
   return randomLoc;
 }
 
 bool Game::checkGameOverConditions() const noexcept {
-   return !_brd.isWithinBoard(_snek.location())
-     || _snek.isCollidingWithSelf() ||
-         std::any_of(begin(_rocks), end(_rocks),
-                     [&](Rock const& r) { return r.location() == _snek.location(); });
+  return !_brd.isWithinBoard(_snek.location()) || _snek.isCollidingWithSelf() ||
+         std::any_of(begin(_rocks), end(_rocks), [&](Rock const& r) {
+           return r.location() == _snek.location();
+         });
 }
 
 void Game::handlePlayerInput() noexcept {
@@ -118,7 +118,8 @@ void Game::handlePlayerInput() noexcept {
 }
 
 void Game::updateNextDirection(Direction const& nextDir) noexcept {
-  // Don't do anything if we're already going (or planning to go) in this direction
+  // Don't do anything if we're already going (or planning to go) in this
+  // direction
   if (_dir == nextDir || _pendingDir == nextDir) return;
 
   // Make sure we can't go in the exact opposite direction
@@ -126,7 +127,7 @@ void Game::updateNextDirection(Direction const& nextDir) noexcept {
     case Direction::UP:
       if (_dir == Direction::DOWN) return;
       break;
-    case Direction::DOWN: 
+    case Direction::DOWN:
       if (_dir == Direction::UP) return;
       break;
     case Direction::LEFT:

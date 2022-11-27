@@ -1,4 +1,5 @@
 #include "Snake.h"
+
 #include <algorithm>
 
 void Snake::draw(Board& brd) const noexcept {
@@ -13,11 +14,20 @@ void Snake::draw(Board& brd) const noexcept {
 void Snake::move(Direction const dir) noexcept {
   Location delta;
   switch (dir) {
-    case Direction::UP:    delta = { 0, -1}; break;
-    case Direction::DOWN:  delta = { 0,  1}; break;
-    case Direction::LEFT:  delta = {-1,  0}; break;
-    case Direction::RIGHT: delta = { 1,  0}; break;
-    default: return;
+    case Direction::UP:
+      delta = {0, -1};
+      break;
+    case Direction::DOWN:
+      delta = {0, 1};
+      break;
+    case Direction::LEFT:
+      delta = {-1, 0};
+      break;
+    case Direction::RIGHT:
+      delta = {1, 0};
+      break;
+    default:
+      return;
   }
 
   if (!_segments.empty()) {
@@ -43,7 +53,7 @@ bool Snake::isOnTile(Location const& loc) const noexcept {
 
   if (std::any_of(begin(_segments), end(_segments),
                   [&](Segment const& s) { return s.location() == loc; })) {
-      return true;
+    return true;
   }
 
   return false;

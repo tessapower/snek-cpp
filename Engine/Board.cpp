@@ -1,4 +1,5 @@
 #include "Board.h"
+
 #include <assert.h>
 
 void Board::drawCell(Location l, Color c) {
@@ -10,8 +11,7 @@ void Board::drawCell(Location l, Color c) {
   // Cell Border
   _gfx.DrawRectDim(screenX, screenY, _cellSize, _cellSize, Colors::Black);
   // Cell Contents
-  _gfx.DrawRectDim(screenX + _cellBorder,
-                   screenY + _cellBorder, _innerCellSize,
+  _gfx.DrawRectDim(screenX + _cellBorder, screenY + _cellBorder, _innerCellSize,
                    _innerCellSize, c);
 }
 
