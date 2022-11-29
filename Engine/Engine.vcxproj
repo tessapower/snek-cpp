@@ -68,7 +68,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory);$(MSBuildProjectDirectory)\include;$(MSBuildProjectDirectory)\..\Game\include</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(MSBuildProjectDirectory)\src;$(MSBuildProjectDirectory)\..\Game\src</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory);$(MSBuildProjectDirectory)\include;$(MSBuildProjectDirectory)\..\Game\include</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(MSBuildProjectDirectory)\src;$(MSBuildProjectDirectory)\..\Game\src</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory);$(MSBuildProjectDirectory)\include;$(MSBuildProjectDirectory)\..\Game\include</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(MSBuildProjectDirectory)\src;$(MSBuildProjectDirectory)\..\Game\src</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory);$(MSBuildProjectDirectory)\include;$(MSBuildProjectDirectory)\..\Game\include</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(MSBuildProjectDirectory)\src;$(MSBuildProjectDirectory)\..\Game\src</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -144,37 +159,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Apple.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="ChiliException.h" />
-    <ClInclude Include="ChiliWin.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="Direction.h" />
-    <ClInclude Include="DXErr.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Location.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="Mouse.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="Rock.h" />
-    <ClInclude Include="Snake.h" />
-    <ClInclude Include="SpriteCodex.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="DXErr.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="SpriteCodex.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FramebufferPS</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -241,6 +225,37 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Game\include\Apple.h" />
+    <ClInclude Include="..\Game\include\Board.h" />
+    <ClInclude Include="..\Game\include\Direction.h" />
+    <ClInclude Include="..\Game\include\Game.h" />
+    <ClInclude Include="..\Game\include\Location.h" />
+    <ClInclude Include="..\Game\include\Rock.h" />
+    <ClInclude Include="..\Game\include\Snake.h" />
+    <ClInclude Include="include\ChiliException.h" />
+    <ClInclude Include="include\ChiliWin.h" />
+    <ClInclude Include="include\Colors.h" />
+    <ClInclude Include="include\DXErr.h" />
+    <ClInclude Include="include\Graphics.h" />
+    <ClInclude Include="include\Keyboard.h" />
+    <ClInclude Include="include\MainWindow.h" />
+    <ClInclude Include="include\Mouse.h" />
+    <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\SpriteCodex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Game\src\Board.cpp" />
+    <ClCompile Include="..\Game\src\Game.cpp" />
+    <ClCompile Include="..\Game\src\Snake.cpp" />
+    <ClCompile Include="src\DXErr.cpp" />
+    <ClCompile Include="src\Graphics.cpp" />
+    <ClCompile Include="src\Keyboard.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MainWindow.cpp" />
+    <ClCompile Include="src\Mouse.cpp" />
+    <ClCompile Include="src\SpriteCodex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
