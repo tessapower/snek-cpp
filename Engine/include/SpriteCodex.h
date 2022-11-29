@@ -4,6 +4,6 @@
 
 class SpriteCodex {
  public:
-  static void drawGameOver(int x, int y, Graphics& gfx);
-  static void drawTitle(int x, int y, Graphics& gfx);
+  static void drawGameOver(Graphics& gfx);
+  static void drawTitle(Graphics& gfx);
 };

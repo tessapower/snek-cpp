@@ -143,18 +143,18 @@ void Game::updateNextDirection(Direction const& nextDir) noexcept {
 
 void Game::ComposeFrame() {
   if (!_hasGameStarted) {
-    SpriteCodex::drawTitle(0, 0, _gfx);
+    SpriteCodex::drawTitle(_gfx);
 
     return;
   }
 
-  if (!_isGameOver) {
-    _brd.drawBorder();
-    _snek.draw(_brd);
-    _apple.draw(_brd);
-    std::ranges::for_each(begin(_rocks), end(_rocks),
-                          [&](Rock const r) { r.draw(_brd); });
-  } else {
-    SpriteCodex::drawGameOver(0, 0, _gfx);
+  _brd.drawBorder();
+  _snek.draw(_brd);
+  _apple.draw(_brd);
+  std::ranges::for_each(begin(_rocks), end(_rocks),
+                        [&](Rock const r) { r.draw(_brd); });
+
+  if (_isGameOver) {
+    SpriteCodex::drawGameOver(_gfx);
   }
 }
