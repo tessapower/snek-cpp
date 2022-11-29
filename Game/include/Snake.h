@@ -14,7 +14,6 @@ class Snake {
   }
   void draw(Board& brd) const noexcept;
   void move(Direction const dir) noexcept;
-  bool isCollidingWithSelf() const noexcept;
   bool isOnTile(Location const& l) const noexcept;
   void moveAndGrow(Direction const dir) noexcept;
 

@@ -54,8 +54,9 @@ void Game::UpdateModel() {
   }
 
   if (_hasGameStarted && !_isGameOver) {
-    if (_frameCount++ % _movePeriod == 0) handleSnakeMovement();
-    _isGameOver = checkGameOverConditions();
+    if (_frameCount++ % _movePeriod == 0) {
+      handleSnakeMovement();
+    }
     handlePlayerInput();
   }
 }
@@ -64,6 +65,17 @@ void Game::handleSnakeMovement() noexcept {
   if (_pendingDir != Direction::NONE) {
     _dir = _pendingDir;
     _pendingDir = Direction::NONE;
+  }
+
+  const auto& nextLoc = _snek.location().next(_dir);
+
+  if (!_brd.isWithinBoard(nextLoc) || _snek.isOnTile(nextLoc)
+    || std::any_of(begin(_rocks), end(_rocks), [&](Rock const& r) {
+        return r.location() == nextLoc;
+      })) {
+    _isGameOver = true;
+
+    return;
   }
 
   if (ateApple()) {
@@ -96,13 +108,6 @@ Location const Game::randomFreeLocation() noexcept {
   } while (!isTileFree(randomLoc));
 
   return randomLoc;
-}
-
-bool Game::checkGameOverConditions() const noexcept {
-  return !_brd.isWithinBoard(_snek.location()) || _snek.isCollidingWithSelf() ||
-         std::any_of(begin(_rocks), end(_rocks), [&](Rock const& r) {
-           return r.location() == _snek.location();
-         });
 }
 
 void Game::handlePlayerInput() noexcept {

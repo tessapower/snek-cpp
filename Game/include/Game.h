@@ -47,7 +47,6 @@ private:
   void handleSnakeMovement() noexcept;
   bool ateApple() const noexcept;
   Location const randomFreeLocation() noexcept;
-  bool checkGameOverConditions() const noexcept;
   void handlePlayerInput() noexcept;
   void updateNextDirection(Direction const& nextDir) noexcept;
   /********************************/
