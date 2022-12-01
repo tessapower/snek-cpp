@@ -19,7 +19,9 @@
  * with The Chili DirectX Framework.                                          *
  * If not, see <http://www.gnu.org/licenses/>.                                *
  ******************************************************************************/
-#pragma once
+#ifndef CHILI_EXCEPTION_H
+#define CHILI_EXCEPTION_H
+
 #include <string>
 
 class ChiliException {
@@ -46,3 +48,5 @@ class ChiliException {
   std::wstring file;
   unsigned int line;
 };
+
+#endif // CHILI_EXCEPTION_H

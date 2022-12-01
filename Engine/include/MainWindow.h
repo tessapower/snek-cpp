@@ -19,7 +19,9 @@
  * with The Chili DirectX Framework.                                          *
  * If not, see <http://www.gnu.org/licenses/>.                                *
  ******************************************************************************/
-#pragma once
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
+
 #include <string>
 
 #include "ChiliException.h"
@@ -87,3 +89,5 @@ class MainWindow : public HWNDKey {
   HINSTANCE hInst = nullptr;
   std::wstring args;
 };
+
+#endif // MAIN_WINDOW_H

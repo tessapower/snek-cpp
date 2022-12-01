@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SNAKE_H
+#define SNAKE_H
+
 #include "Board.h"
 #include "Direction.h"
 #include "Location.h"
@@ -52,3 +54,5 @@ class Snake {
   std::mt19937 _rng;
   std::uniform_int_distribution<int> _randomTailColor;
 };
+
+#endif // SNAKE_H

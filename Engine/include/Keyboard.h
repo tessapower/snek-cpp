@@ -19,7 +19,9 @@
  * with The Chili DirectX Framework.                                          *
  * If not, see <http://www.gnu.org/licenses/>.                                *
  ******************************************************************************/
-#pragma once
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
+
 #include <bitset>
 #include <queue>
 
@@ -75,3 +77,5 @@ class Keyboard {
   std::queue<Event> keybuffer;
   std::queue<char> charbuffer;
 };
+
+#endif // KEYBOARD_H

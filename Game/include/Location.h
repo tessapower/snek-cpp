@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOCATION_H
+#define LOCATION_H
 
 #include <cstdint>
 
@@ -35,3 +36,5 @@ class Location {
 inline bool operator==(Location const& lhs, Location const& rhs) {
   return lhs.x == rhs.x && lhs.y == rhs.y;
 }
+
+#endif // LOCATION_H

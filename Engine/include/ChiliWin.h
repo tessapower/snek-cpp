@@ -19,7 +19,8 @@
  * with The Chili DirectX Framework.                                          *
  * If not, see <http://www.gnu.org/licenses/>.                                *
  ******************************************************************************/
-#pragma once
+#ifndef CHILI_WIN_H
+#define CHILI_WIN_H
 
 // target Windows 7 or later
 #define _WIN32_WINNT 0x0601
@@ -65,3 +66,5 @@
 #define STRICT
 
 #include <Windows.h>
+
+#endif // CHILI_WIN_H

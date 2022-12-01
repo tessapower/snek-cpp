@@ -19,7 +19,8 @@
  * with The Chili DirectX Framework.                                          *
  * If not, see <http://www.gnu.org/licenses/>.                                *
  ******************************************************************************/
-#pragma once
+#ifndef GAME_H
+#define GAME_H
 
 #include <random>
 #include <vector>
@@ -76,3 +77,5 @@ private:
   std::vector<Rock> _rocks{};
   /********************************/
 };
+
+#endif // GAME_H

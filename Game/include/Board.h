@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BOARD_H
+#define BOARD_H
 
 #include <random>
 #include "Graphics.h"
@@ -33,3 +34,5 @@ class Board {
   static constexpr int kBoardWidth = kNumCols * kCellSize + kBoardBorder * 2;
   static constexpr int kBoardHeight = kNumRows * kCellSize + kBoardBorder * 2;
 };
+
+#endif // BOARD_H

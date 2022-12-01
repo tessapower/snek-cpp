@@ -13,7 +13,8 @@
 
 // This version only supports UNICODE.
 
-#pragma once
+#ifndef DX_ERR_H
+#define DX_ERR_H
 
 #include <sal.h>
 
@@ -82,3 +83,5 @@ HRESULT WINAPI DXTraceW(_In_z_ const WCHAR* strFile, _In_ DWORD dwLine,
 #ifdef __cplusplus
 }
 #endif  //__cplusplus
+
+#endif // DX_ERR_H

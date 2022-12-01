@@ -19,7 +19,9 @@
  * with The Chili DirectX Framework.                                          *
  * If not, see <http://www.gnu.org/licenses/>.                                *
  ******************************************************************************/
-#pragma once
+#ifndef MOUSE_H
+#define MOUSE_H
+
 #include <queue>
 
 class Mouse {
@@ -103,3 +105,5 @@ class Mouse {
   bool isInWindow = false;
   std::queue<Event> buffer;
 };
+
+#endif // MOUSE_H

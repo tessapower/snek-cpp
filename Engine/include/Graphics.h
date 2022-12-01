@@ -19,7 +19,9 @@
 * with The Chili DirectX Framework.                                          *
 * If not, see <http://www.gnu.org/licenses/>.                                *
 ******************************************************************************/
-#pragma once
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
+
 #include <d3d11.h>
 #include <wrl.h>
 
@@ -83,3 +85,5 @@ class Graphics {
   static constexpr int ScreenWidth = 800;
   static constexpr int ScreenHeight = 600;
 };
+
+#endif // GRAPHICS_H

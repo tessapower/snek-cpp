@@ -18,7 +18,8 @@
 * You should have received a copy of the GNU General Public License                       *
 * along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
-#pragma once
+#ifndef COLORS_H
+#define COLORS_H
 
 class Color {
 public:
@@ -113,3 +114,5 @@ namespace Colors {
   static constexpr Color Cyan = MakeRGB(0u,255u,255u);
   static constexpr Color Magenta = MakeRGB(255u,0u,255u);
 }
+
+#endif // COLORS_H
