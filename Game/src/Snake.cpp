@@ -52,7 +52,9 @@ bool Snake::isOnTile(Location const& loc) const noexcept {
 }
 
 void Snake::moveAndGrow(Direction const dir) noexcept {
-  _segments.emplace_back(Segment(kTailColors[_randomTailColor(_rng)]));
+  if (_segments.size() < kMaxSegments) {
+    _segments.emplace_back(Segment(kTailColors[_randomTailColor(_rng)]));
+  }
   move(dir);
 }
 
