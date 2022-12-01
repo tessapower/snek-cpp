@@ -6,11 +6,11 @@
 class Snake {
  public:
   Snake(Location const& l)
-      : _location(l), _rng(_rd()), _randomTailColor(0, _numTailColors - 1) {
+      : _location(l), _rng(_rd()), _randomTailColor(0, kNumTailColors - 1) {
     _segments.emplace_back(
-        Segment{{l.x - 1, l.y}, _tailColors[_randomTailColor(_rng)]});
+        Segment{{l.x - 1, l.y}, kTailColors[_randomTailColor(_rng)]});
     _segments.emplace_back(
-        Segment{{l.x - 2, l.y}, _tailColors[_randomTailColor(_rng)]});
+        Segment{{l.x - 2, l.y}, kTailColors[_randomTailColor(_rng)]});
   }
   void draw(Board& brd) const noexcept;
   void move(Direction const dir) noexcept;
@@ -39,9 +39,9 @@ class Snake {
 
   std::vector<Segment> _segments{};
 
-  static constexpr Color _headColor = Colors::MakeRGB(119u, 167u, 117u);
-  static constexpr int _numTailColors = 4;
-  static constexpr Color _tailColors[_numTailColors] = {
+  static constexpr Color kHeadColor = Colors::MakeRGB(119u, 167u, 117u);
+  static constexpr int kNumTailColors = 4;
+  static constexpr Color kTailColors[kNumTailColors] = {
       Colors::MakeRGB(96u, 149u, 102u), Colors::MakeRGB(60u, 108u, 70u),
       Colors::MakeRGB(44u, 78u, 51u), Colors::MakeRGB(60u, 108u, 70u)};
 

@@ -5,23 +5,23 @@
 void Board::drawCell(Location l, Color c) {
   assert(isWithinBoard(l));
 
-  auto screenX = _x + _boardBorder + l.x * _cellSize;
-  auto screenY = _y + _boardBorder + l.y * _cellSize;
+  auto screenX = _x + kBoardBorder + l.x * kCellSize;
+  auto screenY = _y + kBoardBorder + l.y * kCellSize;
 
   // Cell Border
-  _gfx.DrawRectDim(screenX, screenY, _cellSize, _cellSize, Colors::Black);
+  _gfx.DrawRectDim(screenX, screenY, kCellSize, kCellSize, Colors::Black);
   // Cell Contents
-  _gfx.DrawRectDim(screenX + _cellBorder, screenY + _cellBorder, _innerCellSize,
-                   _innerCellSize, c);
+  _gfx.DrawRectDim(screenX + kCellBorder, screenY + kCellBorder, kInnerCellSize,
+                   kInnerCellSize, c);
 }
 
 void Board::drawBorder() {
-  _gfx.DrawRectDim(_x, _y, _boardWidth, _boardHeight, Colors::LightGray);
-  _gfx.DrawRectDim(_x + _boardBorder, _y + _boardBorder,
-                   _boardWidth - _boardBorder * 2,
-                   _boardHeight - _boardBorder * 2, Colors::Black);
+  _gfx.DrawRectDim(_x, _y, kBoardWidth, kBoardHeight, Colors::LightGray);
+  _gfx.DrawRectDim(_x + kBoardBorder, _y + kBoardBorder,
+                   kBoardWidth - kBoardBorder * 2,
+                   kBoardHeight - kBoardBorder * 2, Colors::Black);
 }
 
 bool Board::isWithinBoard(Location l) const {
-  return l.x >= 0 && l.x < _numCols && l.y >= 0 && l.y < _numRows;
+  return l.x >= 0 && l.x < kNumCols && l.y >= 0 && l.y < kNumRows;
 }

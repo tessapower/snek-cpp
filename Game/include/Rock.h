@@ -9,13 +9,13 @@ class Rock {
  public:
   Rock(Location const& loc) : _location(loc){};
 
-  void draw(Board& brd) const noexcept { brd.drawCell(_location, _color); }
+  void draw(Board& brd) const noexcept { brd.drawCell(_location, kColor); }
 
   Location const& location() const noexcept { return _location; }
 
  private:
   Location _location;
-  static constexpr Color _color = Colors::Gray;
+  static constexpr Color kColor = Colors::Gray;
 };
 
 #endif  // ROCK_H

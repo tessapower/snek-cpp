@@ -4,7 +4,7 @@
 
 void Snake::draw(Board& brd) const noexcept {
   // Draw head
-  brd.drawCell(_location, _headColor);
+  brd.drawCell(_location, kHeadColor);
   // Draw Tail
   for (auto const& s : _segments) {
     s.draw(brd);
@@ -52,7 +52,7 @@ bool Snake::isOnTile(Location const& loc) const noexcept {
 }
 
 void Snake::moveAndGrow(Direction const dir) noexcept {
-  _segments.emplace_back(Segment(_tailColors[_randomTailColor(_rng)]));
+  _segments.emplace_back(Segment(kTailColors[_randomTailColor(_rng)]));
   move(dir);
 }
 

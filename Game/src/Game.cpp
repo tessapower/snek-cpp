@@ -54,7 +54,7 @@ void Game::UpdateModel() {
   }
 
   if (_hasGameStarted && !_isGameOver) {
-    if (_frameCount++ % _movePeriod == 0) {
+    if (_frameCount++ % kMovePeriod == 0) {
       handleSnakeMovement();
     }
     handlePlayerInput();

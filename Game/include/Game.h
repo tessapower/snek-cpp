@@ -65,7 +65,7 @@ private:
 
   Direction _dir = Direction::RIGHT;
   Direction _pendingDir = Direction::NONE;
-  static constexpr int _movePeriod = 8;
+  static constexpr int kMovePeriod = 8;
 
   std::random_device _rd;
   std::mt19937 _rng;
