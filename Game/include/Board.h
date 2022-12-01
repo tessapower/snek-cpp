@@ -24,8 +24,8 @@ class Board {
   int _y;
   Graphics& _gfx;
 
-  static constexpr uint8_t _numCols = 30;
-  static constexpr uint8_t _numRows = 20;
+  static constexpr uint8_t _numCols = 36;
+  static constexpr uint8_t _numRows = 24;
   static constexpr int _cellSize = 20;
   static constexpr int _boardBorder = 4;
   static constexpr int _cellBorder= 2;
