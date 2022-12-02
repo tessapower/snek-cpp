@@ -49,6 +49,7 @@ void Game::Go() {
 }
 
 void Game::UpdateModel() {
+  // Wait until user presses enter to start
   if (!_hasGameStarted && _wnd.kbd.KeyIsPressed(VK_RETURN)) {
     _hasGameStarted = true;
   }
@@ -63,13 +64,17 @@ void Game::UpdateModel() {
 
 void Game::handleSnakeMovement() noexcept {
   if (_pendingDir != Direction::NONE) {
+    // Keep going in same direction if player hasn't pressed any arrow keys
     _dir = _pendingDir;
     _pendingDir = Direction::NONE;
   }
 
   const auto& nextLoc = _snek.location().next(_dir);
 
-  if (!_brd.isWithinBoard(nextLoc) || _snek.isOnTile(nextLoc)
+  // Check gameover conditions and return early if snek is gonna die :(
+  // We do this so we don't move and then draw snek in an illegal position,
+  // i.e. off the edge of the board, or somewhere silly like on top of a rock
+  if (!_brd.isWithinBoard(nextLoc) || _snek.isOnLocation(nextLoc)
     || std::any_of(begin(_rocks), end(_rocks), [&](Rock const& r) {
         return r.location() == nextLoc;
       })) {
@@ -78,7 +83,9 @@ void Game::handleSnakeMovement() noexcept {
     return;
   }
 
-  if (ateApple()) {
+  // Snek can either simply move, or move and grow if it will end up eating an
+  // apple on this move
+  if (willEatApple()) {
     _snek.moveAndGrow(_dir);
     _score++;
 
@@ -89,7 +96,7 @@ void Game::handleSnakeMovement() noexcept {
   }
 }
 
-bool Game::ateApple() const noexcept {
+bool Game::willEatApple() const noexcept {
   const auto& nextLoc = _snek.location().next(_dir);
 
   return _apple.location() == nextLoc;
@@ -97,7 +104,7 @@ bool Game::ateApple() const noexcept {
 
 Location const Game::randomFreeLocation() noexcept {
   auto isTileFree = [&](Location const& loc) {
-    return !_snek.isOnTile(loc) && _apple.location() != loc &&
+    return !_snek.isOnLocation(loc) && _apple.location() != loc &&
            std::none_of(begin(_rocks), end(_rocks),
                         [&](Rock const r) { return r.location() == loc; });
   };

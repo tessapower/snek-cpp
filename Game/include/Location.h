@@ -5,6 +5,9 @@
 
 #include "Direction.h"
 
+/**
+ * @brief Represents a location (x, y) on a 2D game board.
+*/
 class Location {
  public:
   Location(int x = 0, int y = 0) : x(x), y(y){};

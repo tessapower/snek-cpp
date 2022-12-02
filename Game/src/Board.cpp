@@ -8,14 +8,15 @@ void Board::drawCell(Location l, Color c) {
   auto screenX = _x + kBoardBorder + l.x * kCellSize;
   auto screenY = _y + kBoardBorder + l.y * kCellSize;
 
-  // Cell Border
+  // Draw cell border
   _gfx.DrawRectDim(screenX, screenY, kCellSize, kCellSize, Colors::Black);
-  // Cell Contents
+  // Draw cell contents
   _gfx.DrawRectDim(screenX + kCellBorder, screenY + kCellBorder, kInnerCellSize,
                    kInnerCellSize, c);
 }
 
 void Board::drawBorder() {
+  // Simply a square within a square *insert clap emoji here*
   _gfx.DrawRectDim(_x, _y, kBoardWidth, kBoardHeight, Colors::LightGray);
   _gfx.DrawRectDim(_x + kBoardBorder, _y + kBoardBorder,
                    kBoardWidth - kBoardBorder * 2,

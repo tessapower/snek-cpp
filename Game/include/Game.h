@@ -11,8 +11,8 @@
  * License, or (at your option) any later version.                            *
  *                                                                            *
  * The Chili DirectX Framework is distributed in the hope that it will be     *
- * useful,but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              *
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of     *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the               *
  * GNU General Public License for more details.                               *
  *                                                                            *
  * You should have received a copy of the GNU General Public License along    *
@@ -33,6 +33,9 @@
 #include "Mouse.h"
 #include "Snake.h"
 
+/**
+ * @brief A class for all the snek game data and logic.
+*/
 class Game {
 public:
   Game(class MainWindow& wnd);
@@ -43,39 +46,60 @@ private:
   void ComposeFrame();
   void UpdateModel();
 
-  /********************************/
-  /*  User Functions              */
+  /**
+   * @brief Handles how snek should move. If snek ate an apple, makes sure
+   *   snek grows. If snek dies, then sets gameover.
+  */
   void handleSnakeMovement() noexcept;
-  bool ateApple() const noexcept;
+
+  /**
+   * @brief Used to check if snek's current move results in eating an apple.
+  */
+  bool willEatApple() const noexcept;
+
+  /**
+   * @brief Returns a random location on the Board free from rocks, apples, and
+   * snek.
+  */
   Location const randomFreeLocation() noexcept;
+
+  /**
+   * @brief Call to respond to the player pressing the arrow keys.
+  */
   void handlePlayerInput() noexcept;
+
+  /**
+   * @brief Updates the pending direction, making sure the player can't turn
+   *   snek back on itself.
+  */
   void updateNextDirection(Direction const& nextDir) noexcept;
-  /********************************/
+
 private:
   MainWindow& _wnd;
   Graphics _gfx;
 
-  /********************************/
-  /*  User Variables              */
+  // Board & game state
   Board _brd;
-  Snake _snek;
   bool _hasGameStarted = false;
   bool _isGameOver = false;
   int _frameCount = 0;
   int _score = 0;
 
+  // Snek & movement related things
+  Snake _snek;
   Direction _dir = Direction::RIGHT;
   Direction _pendingDir = Direction::NONE;
   static constexpr int kMovePeriod = 8;
 
+  // Random number generation for random locations on the Board
   std::random_device _rd;
   std::mt19937 _rng;
   std::uniform_int_distribution<int> _xDist;
   std::uniform_int_distribution<int> _yDist;
 
+  // The goodies and the baddies
   Apple _apple;
   std::vector<Rock> _rocks{};
-  /********************************/
 };
 
 #endif // GAME_H
